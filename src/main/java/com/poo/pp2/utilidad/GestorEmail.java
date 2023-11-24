@@ -1,4 +1,4 @@
-package utilidad;
+package com.poo.pp2.utilidad;
 
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -27,7 +27,7 @@ public class GestorEmail {
     properties.put("mail.smtp.port", "587");
   }
 
-  public static boolean validarEmail(String pEmail) {
+  public static boolean esEmailValido(String pEmail) {
     if (pEmail == null || pEmail.isEmpty()) {
       return false;
     }
@@ -76,7 +76,7 @@ public class GestorEmail {
         String email = "fauricio.gr@gmail.com";
         ClienteEmailable clienteEmailable = new ClienteEmailable("live_89f34a797cc9a9b60ef3");
         GestorEmail gestorEmail = new GestorEmail();
-        if (GestorEmail.validarEmail(email)) {
+        if (GestorEmail.esEmailValido(email)) {
             try {
                 gestorEmail.enviarEmail(email, "Prueba", "Este es un mensaje de prueba");
                 System.out.println("Email enviado");

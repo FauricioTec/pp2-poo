@@ -1,4 +1,4 @@
-package utilidad;
+package com.poo.pp2.utilidad;
 
 import java.net.URI;
 import java.net.http.HttpClient;

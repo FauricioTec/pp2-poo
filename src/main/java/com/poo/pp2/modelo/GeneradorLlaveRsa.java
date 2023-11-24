@@ -1,4 +1,4 @@
-package modelo;
+package com.poo.pp2.modelo;
 
 import java.math.BigInteger;
 import java.util.Random;

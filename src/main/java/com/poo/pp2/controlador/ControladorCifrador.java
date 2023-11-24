@@ -1,21 +1,21 @@
-package controlador;
+package com.poo.pp2.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import modelo.CifradoBinario;
-import modelo.CifradoCesar;
-import modelo.CifradoMensajeInverso;
-import modelo.CifradoPalabraInversa;
-import modelo.CifradoPorLlave;
-import modelo.CifradoRsa;
-import modelo.CifradoTelefonico;
-import modelo.CifradoVigenere;
-import modelo.Cifrador;
-import modelo.GeneradorLlaveRsa;
-import modelo.LlaveRsa;
-import utilidad.GestorEmail;
-import vista.FormCifrador;
+import com.poo.pp2.modelo.CifradoBinario;
+import com.poo.pp2.modelo.CifradoCesar;
+import com.poo.pp2.modelo.CifradoMensajeInverso;
+import com.poo.pp2.modelo.CifradoPalabraInversa;
+import com.poo.pp2.modelo.CifradoPorLlave;
+import com.poo.pp2.modelo.CifradoRsa;
+import com.poo.pp2.modelo.CifradoTelefonico;
+import com.poo.pp2.modelo.CifradoVigenere;
+import com.poo.pp2.modelo.Cifrador;
+import com.poo.pp2.modelo.GeneradorLlaveRsa;
+import com.poo.pp2.modelo.LlaveRsa;
+import com.poo.pp2.utilidad.GestorEmail;
+import com.poo.pp2.vista.FormCifrador;
 
 public class ControladorCifrador implements ActionListener {
 
@@ -34,7 +34,10 @@ public class ControladorCifrador implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()) {
       case "Aplicar algoritmo" -> aplicarAlgoritmo();
-      case "Enviar email" -> enviarEmail();
+      case "Enviar email" -> {
+        Thread emailThread = new Thread(this::enviarEmail);
+        emailThread.start();
+      }
       case "Abrir archivo" -> abrirArchivo();
       case "Salir" -> salir();
     }
@@ -43,21 +46,21 @@ public class ControladorCifrador implements ActionListener {
   public void enviarEmail() {
     String email = vista.emailTextField.getText();
     GestorEmail gestorEmail = new GestorEmail();
-    if (GestorEmail.validarEmail(email)) {
-      try {
-        String salida = vista.salidaTextArea.getText();
-        if (salida.isEmpty()) {
-          JOptionPane.showMessageDialog(vista, "No hay mensaje para enviar");
-          return;
-        }
-        String cuerpo = "Este es el resultado de aplicar el algoritmo: " + salida;
-        gestorEmail.enviarEmail(email, "Resultado de aplicar el algoritmo", cuerpo);
-        JOptionPane.showMessageDialog(vista, "Email enviado");
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(vista, "Error al enviar el email");
-      }
-    } else {
+    if (!GestorEmail.esEmailValido(email)) {
       JOptionPane.showMessageDialog(vista, "El email no es valido");
+      return;
+    }
+    try {
+      String salida = vista.salidaTextArea.getText();
+      if (salida.isEmpty()) {
+        JOptionPane.showMessageDialog(vista, "No hay mensaje para enviar");
+        return;
+      }
+      String cuerpo = "Este es el resultado de aplicar el algoritmo: " + salida;
+      gestorEmail.enviarEmail(email, "Resultado de aplicar el algoritmo", cuerpo);
+      JOptionPane.showMessageDialog(vista, "Email enviado");
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(vista, "Error al enviar el email");
     }
   }
 

@@ -1,4 +1,4 @@
-package modelo;
+package com.poo.pp2.modelo;
 
 public class CifradoPorLlave extends CifradoSustitucion {
 

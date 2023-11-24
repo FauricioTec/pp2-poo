@@ -1,8 +1,8 @@
 package com.poo.pp2;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import controlador.ControladorCifrador;
-import vista.FormCifrador;
+import com.poo.pp2.controlador.ControladorCifrador;
+import com.poo.pp2.vista.FormCifrador;
 
 public class Pp2 {
 

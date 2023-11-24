@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista;
+package com.poo.pp2.vista;
 
 /**
  *
@@ -71,6 +71,7 @@ public class FormCifrador extends javax.swing.JFrame {
 
         aplicarAlgoritmoButton.setText("Aplicar algoritmo");
 
+        salidaTextArea.setEditable(false);
         salidaTextArea.setColumns(20);
         salidaTextArea.setRows(5);
         jScrollPane2.setViewportView(salidaTextArea);
