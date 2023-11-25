@@ -4,7 +4,7 @@ public abstract class CifradoSustitucion extends Cifrador {
 
 
   @Override
-  public boolean esMensajeValido(String pMensaje) {
+  protected boolean esMensajeValido(String pMensaje) {
     if (pMensaje == null || pMensaje.isEmpty()) {
       return false;
     }
@@ -22,7 +22,7 @@ public abstract class CifradoSustitucion extends Cifrador {
   }
 
   @Override
-  public boolean esMensajeCifradoValido(String pMensaje) {
+  protected boolean esMensajeCifradoValido(String pMensaje) {
     return esMensajeValido(pMensaje);
   }
 

@@ -1,9 +1,12 @@
 package com.poo.pp2.modelo;
 
-public class CifradoBinario extends Cifrador {
+public class CifradorBinario extends Cifrador {
 
   @Override
-  public String cifrar(String pMensaje) {
+  public String cifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje no es válido");
+    }
     String mensaje = pMensaje.toLowerCase();
     StringBuilder mensajeCifrado = new StringBuilder();
 
@@ -26,7 +29,10 @@ public class CifradoBinario extends Cifrador {
   }
 
   @Override
-  public String descifrar(String pMensaje) {
+  public String descifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeCifradoValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje cifrado no es válido");
+    }
     StringBuilder mensajeDescifrado = new StringBuilder();
 
     String[] mensaje = pMensaje.split(" ");
@@ -42,7 +48,7 @@ public class CifradoBinario extends Cifrador {
   }
 
   @Override
-  public boolean esMensajeValido(String pMensaje) {
+  protected boolean esMensajeValido(String pMensaje) {
     for (char caracter : pMensaje.toCharArray()) {
       if (!esCaracterValido(caracter)) {
         return false;
@@ -57,7 +63,7 @@ public class CifradoBinario extends Cifrador {
   }
 
   @Override
-  public boolean esMensajeCifradoValido(String pMensaje) {
+  protected boolean esMensajeCifradoValido(String pMensaje) {
     String[] mensaje = pMensaje.split(" ");
     for (String palabra : mensaje) {
       if (!esCifradoValido(palabra)) {

@@ -54,7 +54,7 @@ public class FormCifrador extends javax.swing.JFrame {
 
         jLabel2.setText("Algoritmo:");
 
-        tipoCifradoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cesar", "Por llave", "Vigenere", "Palabra inversa", "Mensaje inverso", "Telefonico", "Binario", "RSA", "DES", "AES" }));
+        tipoCifradoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cesar", "Por llave", "Vigenere", "Palabra inversa", "Mensaje inverso", "Telefonico", "Binario", "RSA", "Triple DES", "AES" }));
         tipoCifradoComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoCifradoComboBoxActionPerformed(evt);

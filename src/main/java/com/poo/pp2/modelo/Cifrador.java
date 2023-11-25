@@ -2,15 +2,15 @@ package com.poo.pp2.modelo;
 
 public abstract class Cifrador {
 
-  public abstract String cifrar(String pMensaje);
+  public abstract String cifrar(String pMensaje) throws Exception;
 
-  public abstract String descifrar(String pMensaje);
+  public abstract String descifrar(String pMensaje) throws Exception;
 
-  public boolean esMensajeValido(String pMensaje) {
+  protected boolean esMensajeValido(String pMensaje) {
     return pMensaje != null && !pMensaje.isEmpty();
   }
 
-  public boolean esMensajeCifradoValido(String pMensaje) {
+  protected boolean esMensajeCifradoValido(String pMensaje) {
     return pMensaje != null && !pMensaje.isEmpty();
   }
 

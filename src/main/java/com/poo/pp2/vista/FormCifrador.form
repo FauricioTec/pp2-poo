@@ -168,7 +168,7 @@
                 <StringItem index="5" value="Telefonico"/>
                 <StringItem index="6" value="Binario"/>
                 <StringItem index="7" value="RSA"/>
-                <StringItem index="8" value="DES"/>
+                <StringItem index="8" value="Triple DES"/>
                 <StringItem index="9" value="AES"/>
               </StringArray>
             </Property>

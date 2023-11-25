@@ -1,10 +1,13 @@
 package com.poo.pp2.modelo;
 
-public class CifradoCesar extends CifradoSustitucion {
+public class CifradorCesar extends CifradoSustitucion {
 
   private static final int DESPLAZAMIENTO = 3;
 
-  public String cifrar(String pMensaje) {
+  public String cifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje no es válido");
+    }
     String mensaje = pMensaje.toUpperCase();
     StringBuilder mensajeCifrado = new StringBuilder();
     for (int i = 0; i < mensaje.length(); i++) {
@@ -19,7 +22,10 @@ public class CifradoCesar extends CifradoSustitucion {
     return mensajeCifrado.toString();
   }
 
-  public String descifrar(String pMensaje) {
+  public String descifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeCifradoValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje cifrado no es válido");
+    }
     String mensaje = pMensaje.toUpperCase();
     StringBuilder mensajeDescifrado = new StringBuilder();
     for (int i = 0; i < mensaje.length(); i++) {

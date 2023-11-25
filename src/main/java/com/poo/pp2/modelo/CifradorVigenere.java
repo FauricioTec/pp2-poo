@@ -1,10 +1,13 @@
 package com.poo.pp2.modelo;
 
-public class CifradoVigenere extends CifradoSustitucion {
+public class CifradorVigenere extends CifradoSustitucion {
 
-  private int cifra;
+  private final int cifra;
 
-  public CifradoVigenere(String pCifra) {
+  public CifradorVigenere(String pCifra) {
+    if (!esCifraValida(pCifra)) {
+      throw new IllegalArgumentException("La cifra debe ser un número de dos dígitos");
+    }
     cifra = Integer.parseInt(pCifra);
   }
 
@@ -21,7 +24,10 @@ public class CifradoVigenere extends CifradoSustitucion {
   }
 
   @Override
-  public String cifrar(String pMensaje) {
+  public String cifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje no es válido");
+    }
     String mensaje = pMensaje.toLowerCase();
     StringBuilder mensajeCifrado = new StringBuilder();
     int j = 0;
@@ -40,7 +46,10 @@ public class CifradoVigenere extends CifradoSustitucion {
   }
 
   @Override
-  public String descifrar(String pMensaje) {
+  public String descifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeCifradoValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje cifrado no es válido");
+    }
     String mensaje = pMensaje.toLowerCase();
     StringBuilder mensajeDescifrado = new StringBuilder();
     int j = 0;
@@ -56,13 +65,5 @@ public class CifradoVigenere extends CifradoSustitucion {
       }
     }
     return mensajeDescifrado.toString();
-  }
-
-  public int getCifra() {
-    return cifra;
-  }
-
-  public void setCifra(int cifra) {
-    this.cifra = cifra;
   }
 }

@@ -1,10 +1,13 @@
 package com.poo.pp2.modelo;
 
-public class CifradoPorLlave extends CifradoSustitucion {
+public class CifradorPorLlave extends CifradoSustitucion {
 
-  private String llave;
+  private final String llave;
 
-  public CifradoPorLlave(String pLlave) {
+  public CifradorPorLlave(String pLlave) {
+    if (!esLlaveValida(pLlave)) {
+      throw new IllegalArgumentException("La llave no es válida");
+    }
     llave = pLlave.toLowerCase();
   }
 
@@ -22,7 +25,10 @@ public class CifradoPorLlave extends CifradoSustitucion {
 
 
   @Override
-  public String cifrar(String pMensaje) {
+  public String cifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje no es válido");
+    }
     String mensaje = pMensaje.toLowerCase();
     StringBuilder mensajeCifrado = new StringBuilder();
     int j = 0;
@@ -40,7 +46,10 @@ public class CifradoPorLlave extends CifradoSustitucion {
   }
 
   @Override
-  public String descifrar(String pMensaje) {
+  public String descifrar(String pMensaje) throws IllegalArgumentException {
+    if (!esMensajeCifradoValido(pMensaje)) {
+      throw new IllegalArgumentException("El mensaje cifrado no es válido");
+    }
     StringBuilder mensajeDescifrado = new StringBuilder();
     int j = 0;
     for (Character caracter : pMensaje.toCharArray()) {
@@ -54,13 +63,5 @@ public class CifradoPorLlave extends CifradoSustitucion {
       }
     }
     return mensajeDescifrado.toString();
-  }
-
-  public String getLlave() {
-    return llave;
-  }
-
-  public void setLlave(String llave) {
-    this.llave = llave;
   }
 }

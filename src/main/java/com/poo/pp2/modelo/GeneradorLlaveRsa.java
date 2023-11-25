@@ -21,10 +21,10 @@ public class GeneradorLlaveRsa {
   }
 
   private void generarClaves() {
-    int p = generarNumeroPrimoAleatorio(10, 1000);
+    int p = generarNumeroPrimoAleatorio(10, 200);
     int q;
     do {
-      q = generarNumeroPrimoAleatorio(10, 1000);
+      q = generarNumeroPrimoAleatorio(10, 200);
     } while (q == p);
 
     int n = p * q;
