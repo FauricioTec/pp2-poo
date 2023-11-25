@@ -18,17 +18,17 @@ import javax.mail.internet.MimeMessage;
 public class GestorEmail {
 
   /**
-   * Usuario de la cuenta de correo
-   */
-  private final String usuario = "correosautomaticos673@gmail.com";
-  /**
-   * Contraseña de la cuenta de correo
-   */
-  private final String contrasenna = "dwhv ixzp lnud ljwl";
-  /**
    * Propiedades de la cuenta de correo
    */
   private final Properties properties;
+  /**
+   * Usuario de la cuenta de correo
+   */
+  private String usuario = "correosautomaticos673@gmail.com";
+  /**
+   * Contraseña de la cuenta de correo
+   */
+  private String contrasenna = "dwhv ixzp lnud ljwl";
 
   /**
    * Constructor que inicializa las propiedades de la cuenta de correo
@@ -39,6 +39,23 @@ public class GestorEmail {
     properties.put("mail.smtp.starttls.enable", "true");
     properties.put("mail.smtp.host", "smtp.gmail.com");
     properties.put("mail.smtp.port", "587");
+  }
+
+  /**
+   * Constructor que inicializa las propiedades de la cuenta de correo y el usuario y contraseña
+   * para enviar emails
+   *
+   * @param pUsuario     Usuario de la cuenta de correo
+   * @param pContrasenna Contraseña de la cuenta de correo
+   */
+  public GestorEmail(String pUsuario, String pContrasenna) {
+    properties = new Properties();
+    properties.put("mail.smtp.auth", "true");
+    properties.put("mail.smtp.starttls.enable", "true");
+    properties.put("mail.smtp.host", "smtp.gmail.com");
+    properties.put("mail.smtp.port", "587");
+    this.usuario = pUsuario;
+    this.contrasenna = pContrasenna;
   }
 
   /**
