@@ -238,6 +238,7 @@ public class ControladorCifrador implements ActionListener {
 
     if (vista.tipoOperacionComboBox.getSelectedIndex() == 0 && llaveTexto.isEmpty()) {
       GeneradorLlaveRsa generadorLlaveRsa = new GeneradorLlaveRsa();
+      generadorLlaveRsa.generarLlaves();
       JOptionPane.showMessageDialog(vista,
           "Su llave pública es: " + generadorLlaveRsa.getLlaveRsaPublica() + "\n"
               + "Su llave privada es: " + generadorLlaveRsa.getLlaveRsaPrivada());

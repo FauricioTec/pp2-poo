@@ -33,7 +33,7 @@ public class GeneradorLlaveRsa {
   /**
    * Metodo que genera las llaves RSA
    */
-  public void generarClaves() {
+  public void generarLlaves() {
     int p = generarNumeroPrimoAleatorio(10, 200);
     int q;
     do {
