@@ -4,6 +4,10 @@ public class CifradorCesar extends CifradoSustitucion {
 
   private static final int DESPLAZAMIENTO = 3;
 
+  public CifradorCesar() {
+
+  }
+
   public String cifrar(String pMensaje) throws IllegalArgumentException {
     if (!esMensajeValido(pMensaje)) {
       throw new IllegalArgumentException("El mensaje no es válido");

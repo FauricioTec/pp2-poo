@@ -1,12 +1,12 @@
 package com.poo.pp2.modelo;
 
 import java.security.spec.KeySpec;
+import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import java.util.Base64;
 
 public class CifradorTripleDes extends Cifrador {
 
@@ -42,7 +42,7 @@ public class CifradorTripleDes extends Cifrador {
     Cipher cifrador = Cipher.getInstance("DESede/CBC/PKCS5Padding");
     cifrador.init(Cipher.ENCRYPT_MODE, llave, new IvParameterSpec(new byte[8]));
     byte[] mensajeCifrado = cifrador.doFinal(pMensaje.getBytes());
-    return Base64.getEncoder().encodeToString(mensajeCifrado);
+    return encode(mensajeCifrado);
   }
 
   @Override
@@ -54,5 +54,13 @@ public class CifradorTripleDes extends Cifrador {
     cifrador.init(Cipher.DECRYPT_MODE, llave, new IvParameterSpec(new byte[8]));
     byte[] mensajeDescifrado = cifrador.doFinal(Base64.getDecoder().decode(pMensaje));
     return new String(mensajeDescifrado);
+  }
+
+  private String encode(byte[] data) {
+    return Base64.getEncoder().encodeToString(data);
+  }
+
+  public SecretKey getLlave() {
+    return llave;
   }
 }

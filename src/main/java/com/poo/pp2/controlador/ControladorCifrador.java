@@ -1,5 +1,7 @@
 package com.poo.pp2.controlador;
 
+import com.poo.pp2.modelo.Cifrador;
+import com.poo.pp2.modelo.CifradorAes;
 import com.poo.pp2.modelo.CifradorBinario;
 import com.poo.pp2.modelo.CifradorCesar;
 import com.poo.pp2.modelo.CifradorMensajeInverso;
@@ -9,7 +11,6 @@ import com.poo.pp2.modelo.CifradorRsa;
 import com.poo.pp2.modelo.CifradorTelefonico;
 import com.poo.pp2.modelo.CifradorTripleDes;
 import com.poo.pp2.modelo.CifradorVigenere;
-import com.poo.pp2.modelo.Cifrador;
 import com.poo.pp2.modelo.GeneradorLlaveRsa;
 import com.poo.pp2.modelo.LlaveRsa;
 import com.poo.pp2.utilidad.GestorEmail;
@@ -138,8 +139,8 @@ public class ControladorCifrador implements ActionListener {
       case 5 -> new CifradorTelefonico();
       case 6 -> new CifradorBinario();
       case 7 -> obtenerCifradorRsa();
-      case 8 -> obtenerCifradorTripleDes();
-      case 9 -> new CifradorCesar(); //TODO: Cifrado de AES
+      case 8 -> obtenerCifradorModerno("DESede");
+      case 9 -> obtenerCifradorModerno("AES");
       default -> null;
     };
   }
@@ -192,18 +193,24 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
-  private Cifrador obtenerCifradorTripleDes() {
+  private Cifrador obtenerCifradorModerno(String algoritmo) {
     String llave = vista.llaveTextField.getText();
 
-    if (CifradorTripleDes.esLlaveValida(llave)) {
-      SecretKey llaveTripleDes = new javax.crypto.spec.SecretKeySpec(llave.getBytes(), "DESede");
-      return new CifradorTripleDes(llaveTripleDes);
+    boolean esLlaveValida = algoritmo.equals("AES") ? CifradorAes.esLlaveValida(llave)
+        : CifradorTripleDes.esLlaveValida(
+            llave);
+
+    if (esLlaveValida) {
+      SecretKey llaveSecreta = new javax.crypto.spec.SecretKeySpec(llave.getBytes(), algoritmo);
+      return algoritmo.equals("AES") ? new CifradorAes(llaveSecreta)
+          : new CifradorTripleDes(llaveSecreta);
     } else if (llave.isEmpty()) {
       JOptionPane.showMessageDialog(vista, "Requiere ingresar una llave");
       return null;
     } else {
       JOptionPane.showMessageDialog(vista, "La llave no es válida");
       return null;
+
     }
 
   }
@@ -220,7 +227,8 @@ public class ControladorCifrador implements ActionListener {
       vista.salidaTextArea.setText(mensajeCifrado);
     } catch (Exception e) {
       JOptionPane.showMessageDialog(vista,
-          "No ha sido posible cifrar el mensaje\n" + e.getMessage());
+          "No ha sido posible cifrar el mensaje\n" +
+              "El mensaje no es válido o la llave no es válida");
     }
   }
 
@@ -236,7 +244,8 @@ public class ControladorCifrador implements ActionListener {
       vista.salidaTextArea.setText(mensajeDescifrado);
     } catch (Exception e) {
       JOptionPane.showMessageDialog(vista,
-          "No ha sido posible descifrar el mensaje\n" + e.getMessage());
+          "No ha sido posible descifrar el mensaje\n" +
+              "El mensaje cifrado no es válido o la llave no es válida");
     }
   }
 

@@ -2,6 +2,10 @@ package com.poo.pp2.modelo;
 
 public abstract class Cifrador {
 
+  public Cifrador() {
+
+  }
+
   public abstract String cifrar(String pMensaje) throws Exception;
 
   public abstract String descifrar(String pMensaje) throws Exception;

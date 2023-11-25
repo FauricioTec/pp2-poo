@@ -2,6 +2,9 @@ package com.poo.pp2.modelo;
 
 public abstract class CifradoSustitucion extends Cifrador {
 
+  public CifradoSustitucion() {
+
+  }
 
   @Override
   protected boolean esMensajeValido(String pMensaje) {

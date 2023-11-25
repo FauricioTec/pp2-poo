@@ -2,6 +2,10 @@ package com.poo.pp2.modelo;
 
 public class CifradorBinario extends Cifrador {
 
+  public CifradorBinario() {
+
+  }
+
   @Override
   public String cifrar(String pMensaje) throws IllegalArgumentException {
     if (!esMensajeValido(pMensaje)) {

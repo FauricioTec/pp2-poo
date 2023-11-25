@@ -2,6 +2,10 @@ package com.poo.pp2.modelo;
 
 public class CifradorPalabraInversa extends CifradoTransposicion {
 
+  public CifradorPalabraInversa() {
+
+  }
+
   @Override
   public String cifrar(String pMensaje) throws IllegalArgumentException {
     if (!esMensajeValido(pMensaje)) {

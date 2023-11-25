@@ -14,6 +14,10 @@ public class CifradorTelefonico extends Cifrador {
       {'9', 'w', 'x', 'y', 'z'}
   };
 
+  public CifradorTelefonico() {
+
+  }
+
   @Override
   public String cifrar(String pMensaje) throws IllegalArgumentException {
     if (!esMensajeValido(pMensaje)) {

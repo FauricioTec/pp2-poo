@@ -9,7 +9,7 @@ public class GeneradorLlaveRsa {
   private LlaveRsa llaveRsaPublica;
 
   public GeneradorLlaveRsa() {
-    generarClaves();
+    
   }
 
   @Override
@@ -20,7 +20,7 @@ public class GeneradorLlaveRsa {
         '}';
   }
 
-  private void generarClaves() {
+  public void generarClaves() {
     int p = generarNumeroPrimoAleatorio(10, 200);
     int q;
     do {
