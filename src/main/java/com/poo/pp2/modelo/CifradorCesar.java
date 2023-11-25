@@ -1,14 +1,30 @@
 package com.poo.pp2.modelo;
 
+/**
+ * Clase que representa un cifrador Cesar
+ */
 public class CifradorCesar extends CifradoSustitucion {
 
+  /**
+   * Desplazamiento del cifrador
+   */
   private static final int DESPLAZAMIENTO = 3;
 
+  /**
+   * Constructor de la clase
+   */
   public CifradorCesar() {
 
   }
 
-  public String cifrar(String pMensaje) throws IllegalArgumentException {
+  /**
+   * Metodo que cifra un mensaje
+   *
+   * @param pMensaje Mensaje a cifrar
+   * @return Mensaje cifrado
+   * @throws Exception Si ocurre un error al cifrar el mensaje
+   */
+  public String cifrar(String pMensaje) throws Exception {
     if (!esMensajeValido(pMensaje)) {
       throw new IllegalArgumentException("El mensaje no es válido");
     }
@@ -26,7 +42,14 @@ public class CifradorCesar extends CifradoSustitucion {
     return mensajeCifrado.toString();
   }
 
-  public String descifrar(String pMensaje) throws IllegalArgumentException {
+  /**
+   * Metodo que descifra un mensaje
+   *
+   * @param pMensaje Mensaje a descifrar
+   * @return Mensaje descifrado
+   * @throws Exception Si ocurre un error al descifrar el mensaje
+   */
+  public String descifrar(String pMensaje) throws Exception {
     if (!esMensajeCifradoValido(pMensaje)) {
       throw new IllegalArgumentException("El mensaje cifrado no es válido");
     }

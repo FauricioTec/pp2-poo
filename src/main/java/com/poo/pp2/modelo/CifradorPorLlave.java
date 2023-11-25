@@ -1,9 +1,20 @@
 package com.poo.pp2.modelo;
 
+/**
+ * Clase que representa un cifrador binario
+ */
 public class CifradorPorLlave extends CifradoSustitucion {
 
+  /**
+   * Llave del cifrador
+   */
   private final String llave;
 
+  /**
+   * Constructor de la clase
+   *
+   * @param pLlave Llave del cifrador
+   */
   public CifradorPorLlave(String pLlave) {
     if (!esLlaveValida(pLlave)) {
       throw new IllegalArgumentException("La llave no es válida");
@@ -11,6 +22,12 @@ public class CifradorPorLlave extends CifradoSustitucion {
     llave = pLlave.toLowerCase();
   }
 
+  /**
+   * Metodo que verifica si una llave es valida
+   *
+   * @param pLlave Llave a verificar
+   * @return True si la llave es valida, false de lo contrario
+   */
   public static boolean esLlaveValida(String pLlave) {
     if (pLlave == null || pLlave.isEmpty()) {
       return false;
@@ -24,8 +41,15 @@ public class CifradorPorLlave extends CifradoSustitucion {
   }
 
 
+  /**
+   * Metodo que cifra un mensaje
+   *
+   * @param pMensaje Mensaje a cifrar
+   * @return Mensaje cifrado
+   * @throws Exception Si el mensaje no es valido
+   */
   @Override
-  public String cifrar(String pMensaje) throws IllegalArgumentException {
+  public String cifrar(String pMensaje) throws Exception {
     if (!esMensajeValido(pMensaje)) {
       throw new IllegalArgumentException("El mensaje no es válido");
     }
@@ -45,8 +69,15 @@ public class CifradorPorLlave extends CifradoSustitucion {
     return mensajeCifrado.toString();
   }
 
+  /**
+   * Metodo que descifra un mensaje
+   *
+   * @param pMensaje Mensaje a descifrar
+   * @return Mensaje descifrado
+   * @throws Exception Si el mensaje cifrado no es valido
+   */
   @Override
-  public String descifrar(String pMensaje) throws IllegalArgumentException {
+  public String descifrar(String pMensaje) throws Exception {
     if (!esMensajeCifradoValido(pMensaje)) {
       throw new IllegalArgumentException("El mensaje cifrado no es válido");
     }

@@ -2,8 +2,14 @@ package com.poo.pp2.modelo;
 
 import java.math.BigInteger;
 
+/**
+ * Clase que representa un cifrador RSA
+ */
 public class CifradorRsa extends Cifrador {
 
+  /**
+   * Llave RSA para cifrar y descifrar
+   */
   private final LlaveRsa llave;
 
   public CifradorRsa(LlaveRsa pLlave) {

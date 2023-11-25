@@ -1,20 +1,36 @@
 package com.poo.pp2.modelo;
 
+/**
+ * Clase que representa un cifrador Vigenere
+ */
 public class LlaveRsa {
 
+  /**
+   * Modulo de la llave
+   */
   private int modulo;
+  /**
+   * Exponente de la llave
+   */
   private int exponente;
 
+  /**
+   * Constructor de la clase
+   *
+   * @param pModulo    Modulo de la llave
+   * @param pExponente Exponente de la llave
+   */
   public LlaveRsa(int pModulo, int pExponente) {
     modulo = pModulo;
     exponente = pExponente;
   }
 
-  @Override
-  public String toString() {
-    return modulo + "-" + exponente;
-  }
-
+  /**
+   * Metodo que convierte una llave RSA a un string
+   *
+   * @param llaveRsaPublica Llave RSA a convertir
+   * @return String de la llave RSA
+   */
   public static LlaveRsa toLlaveRsa(String llaveRsaPublica) {
     String[] partes = llaveRsaPublica.split("-");
     int n = Integer.parseInt(partes[0]);
@@ -22,6 +38,12 @@ public class LlaveRsa {
     return new LlaveRsa(n, e);
   }
 
+  /**
+   * Metodo que verifica si una llave RSA es valida
+   *
+   * @param llaveRsaPublica Llave RSA a verificar
+   * @return True si la llave RSA es valida, false de lo contrario
+   */
   public static boolean esLlaveRsaValida(String llaveRsaPublica) {
     String[] partes = llaveRsaPublica.split("-");
     if (partes.length != 2) {
@@ -34,6 +56,11 @@ public class LlaveRsa {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return modulo + "-" + exponente;
   }
 
   public int getModulo() {

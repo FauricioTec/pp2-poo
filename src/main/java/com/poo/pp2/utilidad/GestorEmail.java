@@ -12,13 +12,27 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Clase que gestiona el envio de emails y la verificacion de emails
+ */
 public class GestorEmail {
 
+  /**
+   * Usuario de la cuenta de correo
+   */
   private final String usuario = "correosautomaticos673@gmail.com";
+  /**
+   * Contraseña de la cuenta de correo
+   */
   private final String contrasenna = "dwhv ixzp lnud ljwl";
-
+  /**
+   * Propiedades de la cuenta de correo
+   */
   private final Properties properties;
 
+  /**
+   * Constructor que inicializa las propiedades de la cuenta de correo
+   */
   public GestorEmail() {
     properties = new Properties();
     properties.put("mail.smtp.auth", "true");
@@ -27,6 +41,12 @@ public class GestorEmail {
     properties.put("mail.smtp.port", "587");
   }
 
+  /**
+   * Metodo que verifica si un email es valido
+   *
+   * @param pEmail Email a verificar
+   * @return true si el email es valido, false si no
+   */
   public static boolean esEmailValido(String pEmail) {
     if (pEmail == null || pEmail.isEmpty()) {
       return false;
@@ -49,6 +69,14 @@ public class GestorEmail {
     }
   }
 
+  /**
+   * Metodo que envia un email
+   *
+   * @param pEmail   Email al que se le va a enviar el mensaje
+   * @param pAsunto  Asunto del mensaje
+   * @param pMensaje Mensaje a enviar
+   * @throws Exception Si ocurre un error al enviar el email
+   */
   public void enviarEmail(String pEmail, String pAsunto, String pMensaje) throws Exception {
     Session session = Session.getInstance(properties, new Authenticator() {
       @Override
@@ -71,21 +99,5 @@ public class GestorEmail {
     Transport.send(message);
 
   }
-  
-    public static void main(String[] args) {
-        String email = "fauricio.gr@gmail.com";
-        ClienteEmailable clienteEmailable = new ClienteEmailable("live_89f34a797cc9a9b60ef3");
-        GestorEmail gestorEmail = new GestorEmail();
-        if (GestorEmail.esEmailValido(email)) {
-            try {
-                gestorEmail.enviarEmail(email, "Prueba", "Este es un mensaje de prueba");
-                System.out.println("Email enviado");
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            }
-        } else {
-            System.out.println("El email no es valido");
-        }
-    }
 
 }

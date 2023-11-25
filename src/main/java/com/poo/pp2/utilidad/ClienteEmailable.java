@@ -7,16 +7,31 @@ import java.net.http.HttpResponse;
 import org.json.JSONObject;
 
 /**
- * Cliente para el servicio de emailable.com
+ * Cliente para hacer consultas a la API de Emailable
  */
 public class ClienteEmailable {
 
+  /**
+   * API Key de Emailable
+   */
   private String apiKey;
 
+  /**
+   * Constructor que inicializa la clase con la API Key de Emailable
+   *
+   * @param pApiKey API Key de Emailable
+   */
   public ClienteEmailable(String pApiKey) {
     apiKey = pApiKey;
   }
 
+  /**
+   * Metodo que verifica el estado de un email con la API de Emailable
+   *
+   * @param pEmail Email a verificar
+   * @return String con el estado del email
+   * @throws Exception Si ocurre un error al verificar el email
+   */
   public String verificarEmail(String pEmail) throws Exception {
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()

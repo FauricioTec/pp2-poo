@@ -8,14 +8,29 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
+/**
+ * Clase que representa un cifrador Triple DES
+ */
 public class CifradorTripleDes extends Cifrador {
 
+  /** Llave del cifrador */
   private final SecretKey llave;
 
+  /**
+   * Constructor que inicializa la llave del cifrador
+   *
+   * @param pLlave Llave del cifrador
+   */
   public CifradorTripleDes(SecretKey pLlave) {
     llave = pLlave;
   }
 
+  /**
+   * Metodo que verifica si una llave es valida
+   *
+   * @param pLlave Llave a verificar
+   * @return true si la llave es valida, false si no
+   */
   public static boolean esLlaveValida(String pLlave) {
     try {
       byte[] llaveBytes = pLlave.getBytes();
@@ -34,6 +49,13 @@ public class CifradorTripleDes extends Cifrador {
     }
   }
 
+  /**
+   * Metodo que cifra un mensaje
+   *
+   * @param pMensaje Mensaje a cifrar
+   * @return Mensaje cifrado
+   * @throws Exception Si el mensaje no es valido
+   */
   @Override
   public String cifrar(String pMensaje) throws Exception {
     if (!esMensajeValido(pMensaje)) {
@@ -45,6 +67,13 @@ public class CifradorTripleDes extends Cifrador {
     return encode(mensajeCifrado);
   }
 
+  /**
+   * Metodo que descifra un mensaje
+   *
+   * @param pMensaje Mensaje a descifrar
+   * @return Mensaje descifrado
+   * @throws Exception Si el mensaje no es valido
+   */
   @Override
   public String descifrar(String pMensaje) throws Exception {
     if (!esMensajeCifradoValido(pMensaje)) {
@@ -56,6 +85,12 @@ public class CifradorTripleDes extends Cifrador {
     return new String(mensajeDescifrado);
   }
 
+  /**
+   * Metodo que codifica un arreglo de bytes a Base64
+   *
+   * @param data Arreglo de bytes a codificar
+   * @return Arreglo de bytes codificado
+   */
   private String encode(byte[] data) {
     return Base64.getEncoder().encodeToString(data);
   }

@@ -23,10 +23,26 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Controlador para la vista del programa.
+ *
+ * <p>Esta clase implementa la interfaz ActionListener para manejar eventos de la vista,
+ * los cuales corresponden a el envío de un email, abrir un archivo, salir del programa y aplicar el
+ * algoritmo de cifrado o descifrado.
+ */
+
 public class ControladorCifrador implements ActionListener {
 
+  /**
+   * Vista del programa.
+   */
   public FormCifrador vista;
 
+  /**
+   * Constructor de la clase.
+   *
+   * @param pVista Vista del programa.
+   */
   public ControladorCifrador(FormCifrador pVista) {
     vista = pVista;
 
@@ -36,6 +52,12 @@ public class ControladorCifrador implements ActionListener {
     vista.salirButton.addActionListener(this);
   }
 
+  /**
+   * Método que se invoca cuando se genera un evento en la vista y ejecuta la acción
+   * correspondiente.
+   *
+   * @param e Evento que se generó.
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     switch (e.getActionCommand()) {
@@ -52,6 +74,9 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de enviar un email con el resultado de aplicar el algoritmo.
+   */
   public void enviarEmail() {
     String email = vista.emailTextField.getText();
     GestorEmail gestorEmail = new GestorEmail();
@@ -65,8 +90,9 @@ public class ControladorCifrador implements ActionListener {
         JOptionPane.showMessageDialog(vista, "No hay mensaje para enviar");
         return;
       }
-      String cuerpo = "<html><body><p style='font-family: Arial, sans-serif; font-size: 14px;'>"
-          + "Este es el resultado de aplicar el algoritmo:<br><br>" + salida + "</p></body></html>";
+      String cuerpo = "<html><body> <h5>Este es el resultado de aplicar el algoritmo:</h5>"
+          + "<br><br><p style='font-family: Arial, sans-serif; font-size: 14px;'>" + salida
+          + "</p></body></html>";
       gestorEmail.enviarEmail(email, "Resultado de aplicar el algoritmo", cuerpo);
       JOptionPane.showMessageDialog(vista, "Email enviado");
     } catch (Exception e) {
@@ -74,6 +100,9 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de abrir un archivo y mostrar su contenido en la vista.
+   */
   public void abrirArchivo() {
     JFileChooser fileChooser = new JFileChooser();
 
@@ -93,6 +122,13 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de leer el contenido de un archivo y retornarlo como un String.
+   *
+   * @param pFile Archivo a leer.
+   * @return String con el contenido del archivo.
+   * @throws Exception Si ocurre un error al leer el archivo.
+   */
   private String leerArchivo(File pFile) throws Exception {
     StringBuilder fileContent = new StringBuilder();
     java.util.Scanner scanner = new java.util.Scanner(pFile);
@@ -103,6 +139,9 @@ public class ControladorCifrador implements ActionListener {
     return fileContent.toString();
   }
 
+  /**
+   * Método que se encarga de salir del programa.
+   */
   public void salir() {
     int opcion = JOptionPane.showConfirmDialog(vista, "¿Desea salir?", "Salir",
         JOptionPane.YES_NO_OPTION);
@@ -111,6 +150,9 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de aplicar el algoritmo de cifrado o descifrado.
+   */
   public void aplicarAlgoritmo() {
     Cifrador cifrador = obtenerCifradorSeleccionado();
 
@@ -127,6 +169,11 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de obtener el cifrador seleccionado en la vista.
+   *
+   * @return Cifrador seleccionado.
+   */
   private Cifrador obtenerCifradorSeleccionado() {
     int index = vista.tipoCifradoComboBox.getSelectedIndex();
 
@@ -145,6 +192,11 @@ public class ControladorCifrador implements ActionListener {
     };
   }
 
+  /**
+   * Método que se encarga de obtener el cifrador por llave.
+   *
+   * @return Cifrador.
+   */
   private Cifrador obtenerCifradorPorLlave() {
     String llave = vista.llaveTextField.getText();
     if (CifradorPorLlave.esLlaveValida(llave)) {
@@ -158,6 +210,11 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de obtener el cifrador Vigenere.
+   *
+   * @return Cifrador.
+   */
   private Cifrador obtenerCifradorVigenere() {
     String cifra = vista.llaveTextField.getText();
     if (CifradorVigenere.esCifraValida(cifra)) {
@@ -171,6 +228,11 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de obtener el cifrador RSA.
+   *
+   * @return Cifrador.
+   */
   private Cifrador obtenerCifradorRsa() {
     String llaveTexto = vista.llaveTextField.getText().trim();
 
@@ -193,6 +255,12 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de obtener el cifrador AES o TripleDES.
+   *
+   * @param algoritmo Algoritmo a utilizar.
+   * @return Cifrador.
+   */
   private Cifrador obtenerCifradorModerno(String algoritmo) {
     String llave = vista.llaveTextField.getText();
 
@@ -215,6 +283,11 @@ public class ControladorCifrador implements ActionListener {
 
   }
 
+  /**
+   * Método que se encarga de cifrar un mensaje.
+   *
+   * @param cifrador Cifrador a utilizar.
+   */
   private void cifrarMensaje(Cifrador cifrador) {
     String mensaje = vista.entradaTextArea.getText();
     if (mensaje.isEmpty()) {
@@ -232,6 +305,11 @@ public class ControladorCifrador implements ActionListener {
     }
   }
 
+  /**
+   * Método que se encarga de descifrar un mensaje.
+   *
+   * @param cifrador Cifrador a utilizar.
+   */
   private void descifrarMensaje(Cifrador cifrador) {
     String mensajeCifrado = vista.entradaTextArea.getText();
     if (mensajeCifrado.isEmpty()) {
